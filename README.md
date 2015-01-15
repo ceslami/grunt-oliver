@@ -2,6 +2,13 @@
 
 Detect unused files in a [RequireJS](http://requirejs.org/) project. Based on a script originally written by [Justin Abrams](https://justin.abrah.ms/js/finding_unused_requirejs_imports.html).
 
+Example output:
+```bash
+cyrock:$ grunt oliver
+Running "oliver:build" (oliver) task
+>> Should delete: tasks/unused_file.js
+```
+
 ### Getting Started
 This plugin requires Grunt `~0.4.5`
 
