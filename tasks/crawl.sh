@@ -1,5 +1,5 @@
  #/bin/bash
-JS_FILES=$(find $PWD -name '*.js')
+JS_FILES=$(find $1 -name '*.js')
 
 for FILE in $JS_FILES; do
     short_name=`basename $FILE`

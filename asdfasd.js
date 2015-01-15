@@ -1,0 +1,1 @@
+JS_FILES=$(find $PWD/tasks -name '*.js');for FILE in $JS_FILES; do short_name=`basename $FILE` && filename="${short_name%.*}" && git grep --quiet $filename 1>/dev/null && echo 'asdfasdf' && echo $filename && echo "$?" && if [ "$?" == "1" ]; then echo "Should delete: $FILE"; fi; done;

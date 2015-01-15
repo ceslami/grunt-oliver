@@ -24,6 +24,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
+    "install": "chmod u+x ./tasks/crawl.sh",
     "test": "grunt test"
   },
   "devDependencies": {

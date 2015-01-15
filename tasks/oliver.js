@@ -12,57 +12,37 @@ var exec = require('child_process').exec;
 
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+    function findOrphansInPath(path, callback) {
+        exec('./tasks/crawl.sh ' + path, {
+            cwd: process.cwd()
+        }, function(error, stdout, stderr) {
 
-  grunt.registerMultiTask('oliver', 'Detect unused files in a require.js project', function() {
-
-    var done = this.async();
-
-    exec('JS_FILES=$(find $PWD -name *.js);for FILE in $JS_FILES; do short_name=`basename $FILE` && filename="${short_name%.*}" && git grep --quiet $filename 1>/dev/null && if [ "$?" == "1" ]; then echo "Should delete: $FILE"; fi; done;',
-    // exec('ls',
-        function(error, stdout, stderr) {
-            console.log(arguments)
-            grunt.log.writeln('stdout: ' + stdout);
-            grunt.log.writeln('stderr: ' + stderr);
-            if (error !== null) {
-              grunt.log.writeln('exec error: ' + error);
+            if (stderr) {
+                return grunt.log.error('Error: ' + stderr);
             }
 
+            if (error !== null) {
+                return grunt.log.error('Error: ' + error);
+            }
+
+            if (stdout) {
+                return grunt.log.error(stdout)
+            }
+
+            grunt.log.writeln('Success: no orphan files found in `' + path + '`.');
             done();
+        });
+    }
+
+    grunt.registerMultiTask('oliver', 'Detect unused files in a require.js project', function(pathArg) {
+
+        var path = pathArg || this.data.path,
+            done = this.async();
+
+        if (!path) {
+            return grunt.log.error('Error: a path was not specified.');
         }
-    );
 
-    // Merge task-specific and/or target-specific options with these defaults.
-    // var options = this.options({
-    //   punctuation: '.',
-    //   separator: ', '
-    // });
-
-    // // Iterate over all specified file groups.
-    // this.files.forEach(function(f) {
-    //   // Concat specified files.
-    //   var src = f.src.filter(function(filepath) {
-    //     // Warn on and remove invalid source files (if nonull was set).
-    //     if (!grunt.file.exists(filepath)) {
-    //       grunt.log.warn('Source file "' + filepath + '" not found.');
-    //       return false;
-    //     } else {
-    //       return true;
-    //     }
-    //   }).map(function(filepath) {
-    //     // Read file source.
-    //     return grunt.file.read(filepath);
-    //   }).join(grunt.util.normalizelf(options.separator));
-
-    //   // Handle options.
-    //   src += options.punctuation;
-
-    //   // Write the destination file.
-    //   grunt.file.write(f.dest, src);
-
-    //   // Print a success message.
-    //   grunt.log.writeln('File "' + f.dest + '" created.');
-    // });
-  });
+        findOrphansInPath(path, done);
+    });
 };
