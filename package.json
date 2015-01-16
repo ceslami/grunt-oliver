@@ -1,23 +1,23 @@
 {
   "name": "grunt-oliver",
   "description": "Detect unused files in a require.js project",
-  "version": "0.1.0",
-  "homepage": "https://github.com/ceslami/oliver",
+  "version": "0.8.1",
+  "homepage": "https://github.com/ceslami/grunt-oliver",
   "author": {
     "name": "Cyrus Eslami",
     "email": "ceslami@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/ceslami/oliver.git"
+    "url": "git://github.com/ceslami/grunt-oliver.git"
   },
   "bugs": {
-    "url": "https://github.com/ceslami/oliver/issues"
+    "url": "https://github.com/ceslami/grunt-oliver/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/ceslami/oliver/blob/master/LICENSE-MIT"
+      "url": "https://github.com/ceslami/grunt-oliver/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
