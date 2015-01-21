@@ -13,7 +13,7 @@ var exec = require('child_process').exec;
 module.exports = function(grunt) {
 
     function findOrphansInPath(path, callback) {
-        exec('./tasks/crawl.sh ' + path, {
+        exec('./node_modules/grunt-oliver/tasks/crawl.sh ' + path, {
             cwd: process.cwd()
         }, function(error, stdout, stderr) {
 
